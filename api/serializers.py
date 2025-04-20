@@ -4,9 +4,9 @@ from .models import Student, Subject
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['name', 'enrolled_program']
+        fields = ['id', 'name', 'enrolled_program']
 
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
-        fields = ['name', 'year']
+        fields = ['id', 'name', 'year']
