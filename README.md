@@ -45,3 +45,37 @@ Backs up all changes made since the last **full** backup.
   - Backup size increases over time if full backups are not frequent.
 - **Use Case**:
   - Every 2-3 days to complement a full weekly backup.
+
+
+
+
+## Bash Server Management Scripts
+
+This directory contains Bash scripts for automating server maintenance tasks for the deployed API.
+
+### Scripts
+
+1. **health_check.sh**
+   - Monitors CPU, memory, and disk usage.
+   - Checks if the web server is running.
+   - Verifies `/students` and `/subjects` endpoints using curl.
+   - Logs health status to `/var/log/server_health.log`.
+
+2. **backup_api.sh**
+   - Backs up the API directory and database.
+   - Deletes backups older than 7 days.
+   - Logs results to `/var/log/backup.log`.
+
+3. **update_server.sh**
+   - Updates Ubuntu packages.
+   - Pulls latest changes from GitHub.
+   - Restarts the server and logs to `/var/log/update.log`.
+
+### Setup Instructions
+
+```bash
+# Make scripts executable
+chmod +x bash_scripts/*.sh
+
+# Dependencies required:
+sudo apt install curl git mysql-client  # Or postgresql-client, depending on DB
