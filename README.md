@@ -78,4 +78,4 @@ This directory contains Bash scripts for automating server maintenance tasks for
 chmod +x bash_scripts/*.sh
 
 # Dependencies required:
-sudo apt install curl git mysql-client  # Or postgresql-client, depending on DB
+read the requirements.txt
