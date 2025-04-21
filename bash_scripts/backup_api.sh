@@ -1,28 +1,23 @@
 #!/bin/bash
 set -euo pipefail
 
-source /opt/server-maintenance/.env
+source "$(dirname "$0")/../.env"
 
-mkdir -p "$BACKUP_DIR"
+TIMESTAMP=$(date +"%Y-%m-%d")
+mkdir -p "$BACKUP_DIR" "$LOG_DIR"
 
-read -sp "Enter PostgreSQL password for user '$DB_USER': " PGPASSWORD
-echo
-export PGPASSWORD
+BACKUP_FILE="$BACKUP_DIR/student-api-backup-$TIMESTAMP.tar.gz"
+LOG_FILE="$LOG_DIR/backup.log"
 
-TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
+log_message() {
+  echo "[$(date "+%Y-%m-%d %H:%M:%S")] $1" | tee -a "$LOG_FILE"
+}
 
-API_BACKUP_FILE="$BACKUP_DIR/api_backup_$(date +%F).tar.gz"
-tar -czf "$API_BACKUP_FILE" "$API_DIR"
-API_BACKUP_STATUS=$?
+log_message "Backup started."
 
-DB_BACKUP_FILE="$BACKUP_DIR/db_backup_$(date +%F).sql"
-pg_dump -U "$DB_USER" -F p "$DB_NAME" > "$DB_BACKUP_FILE"
-DB_BACKUP_STATUS=$?
-
-find "$BACKUP_DIR" -type f -mtime +7 -delete
-
-if [ $API_BACKUP_STATUS -eq 0 ] && [ $DB_BACKUP_STATUS -eq 0 ]; then
-  echo "[$TIMESTAMP] Backup completed successfully." >> "$LOG_FILE"
+if [ -d "$PROJECT_DIR" ]; then
+  tar -czf "$BACKUP_FILE" -C "$(dirname "$PROJECT_DIR")" "$(basename "$PROJECT_DIR")"
+  log_message "Backup completed: $BACKUP_FILE"
 else
-  echo "[$TIMESTAMP] Backup failed!" >> "$LOG_FILE"
+  log_message "Project directory does not exist: $PROJECT_DIR"
 fi

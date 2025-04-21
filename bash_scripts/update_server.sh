@@ -1,18 +1,31 @@
 #!/bin/bash
 set -euo pipefail
 
-source /opt/server-maintenance/.env
-TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
+source "$(dirname "$0")/../.env"
 
-echo "[$TIMESTAMP] Update started." >> "$LOG_FILE"
+LOG_FILE="$LOG_DIR/update.log"
+mkdir -p "$LOG_DIR"
 
-sudo apt update && sudo apt upgrade -y >> "$LOG_FILE" 2>&1
+log_message() {
+  echo "[$(date "+%Y-%m-%d %H:%M:%S")] $1" | tee -a "$LOG_FILE"
+}
 
-cd "$REPO_DIR"
-if ! git pull origin main >> "$LOG_FILE" 2>&1; then
-  echo "[$TIMESTAMP] ERROR: Git pull failed!" >> "$LOG_FILE"
-  exit 1
+log_message "Server update started."
+
+if [ -d "$PROJECT_DIR" ]; then
+  cd "$PROJECT_DIR"
+  git pull origin main >> "$LOG_FILE" 2>&1
+  log_message "Codebase updated."
+
+  if [ -f "requirements.txt" ]; then
+    pip install -r requirements.txt >> "$LOG_FILE" 2>&1
+    log_message "Dependencies installed."
+  fi
+
+  sudo systemctl restart "$SERVICE_NAME"
+  log_message "$SERVICE_NAME restarted."
+else
+  log_message "Project directory not found: $PROJECT_DIR"
 fi
 
-sudo systemctl restart apache2
-echo "[$TIMESTAMP] Update completed." >> "$LOG_FILE"
+log_message "Server update completed."
