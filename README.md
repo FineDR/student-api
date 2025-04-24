@@ -17,8 +17,8 @@ This is a simple API built with Django and Django REST Framework.
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/student_api.git
-cd student_api
+git clone https://github.com/FineDR/student-api.git
+cd student-api
 ```
 
 2. Create a virtual environment and install dependencies:
@@ -129,8 +129,8 @@ This is a Django REST API for managing students and subjects, containerized usin
 Clone the repository and navigate to the project directory:
 
 ```bash
-git clone https://github.com/yourusername/student_api.git
-cd student_api
+git clone https://github.com/FineDR/student-api.git
+cd student-api
 ```
 
 Build the Docker image:
@@ -156,8 +156,8 @@ sudo docker ps
 ```
 
 Access your API at:  
-📍 `http://localhost:8000/students/`  
-📍 `http://localhost:8000/subjects/`
+📍 `http://localhost:8000/api/students/`  
+📍 `http://localhost:8000/api/subjects/`
 
 ---
 
@@ -173,8 +173,8 @@ sudo apt update && sudo apt install docker.io docker-compose -y
 3. **Clone the repository** to your EC2 instance:
 
 ```bash
-git clone https://github.com/yourusername/student_api.git
-cd student_api
+git clone https://github.com/FineDR/student-api.git
+cd student-api
 ```
 
 4. **Run the application**:
