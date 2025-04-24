@@ -1,19 +1,49 @@
+
 # student-api
 
 This is a simple API built with Django and Django REST Framework.
 
-## Endpoints
-- **GET /api/students/** - Returns a list of students.
+---
+
+##  Endpoints
+
+- **GET /api/students/** - Returns a list of students.  
 - **GET /api/subjects/** - Returns subjects by year.
 
-## Setup Instructions
-1. Clone the repository:  
+---
 
-## 🔄 Backup Schemes
+##  Setup Instructions
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/student_api.git
+cd student_api
+```
+
+2. Create a virtual environment and install dependencies:
+
+```bash
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+```
+
+3. Run migrations and start the server:
+
+```bash
+python manage.py migrate
+python manage.py runserver
+```
+
+---
+
+##  Backup Schemes
 
 This section explains the backup strategies considered for automating the backup process of the deployed API project (Assignment 1) running on an AWS EC2 Ubuntu server.
 
 ### 1. Full Backup
+
 A full backup creates a complete copy of all API project files and databases.
 
 - **Advantages**:
@@ -26,6 +56,7 @@ A full backup creates a complete copy of all API project files and databases.
   - Scheduled weekly backups of `/api/students/`.
 
 ### 2. Incremental Backup
+
 Only changes made since the last backup are saved.
 
 - **Advantages**:
@@ -37,6 +68,7 @@ Only changes made since the last backup are saved.
   - Ideal for daily backups combined with weekly full backups.
 
 ### 3. Differential Backup
+
 Backs up all changes made since the last **full** backup.
 
 - **Advantages**:
@@ -46,10 +78,9 @@ Backs up all changes made since the last **full** backup.
 - **Use Case**:
   - Every 2-3 days to complement a full weekly backup.
 
+---
 
-
-
-## Bash Server Management Scripts
+##  Bash Server Management Scripts
 
 This directory contains Bash scripts for automating server maintenance tasks for the deployed API.
 
@@ -78,4 +109,114 @@ This directory contains Bash scripts for automating server maintenance tasks for
 chmod +x bash_scripts/*.sh
 
 # Dependencies required:
-read the requirements.txt
+# - curl
+# - PostgreSQL client tools (if using PostgreSQL)
+# - tar
+```
+
+---
+
+# 🐳 Docker Deployment
+
+##  1. Project Title and Description
+
+This is a Django REST API for managing students and subjects, containerized using Docker and orchestrated with Docker Compose.
+
+---
+
+##  2. 🔧 Building the Docker Image
+
+Clone the repository and navigate to the project directory:
+
+```bash
+git clone https://github.com/yourusername/student_api.git
+cd student_api
+```
+
+Build the Docker image:
+
+```bash
+sudo docker-compose build
+```
+
+---
+
+##  3.  Running with Docker Compose
+
+Start the containers:
+
+```bash
+sudo docker-compose up -d
+```
+
+Check running containers:
+
+```bash
+sudo docker ps
+```
+
+Access your API at:  
+📍 `http://localhost:8000/students/`  
+📍 `http://localhost:8000/subjects/`
+
+---
+
+##  4.  AWS EC2 Deployment (Free Tier)
+
+1. Launch an **Ubuntu EC2 instance**.
+2. **Install Docker** and **Docker Compose**:
+
+```bash
+sudo apt update && sudo apt install docker.io docker-compose -y
+```
+
+3. **Clone the repository** to your EC2 instance:
+
+```bash
+git clone https://github.com/yourusername/student_api.git
+cd student_api
+```
+
+4. **Run the application**:
+
+```bash
+sudo docker-compose up -d
+```
+
+Access your app at:  
+ `http://<EC2-PUBLIC-IP>:8000`
+
+---
+
+## 5. Docker Hub Image
+
+You can pull the image directly from Docker Hub:
+
+```bash
+docker pull your_dockerhub_username/student_api
+```
+
+Docker Hub Link:  
+ `https://hub.docker.com/r/your_dockerhub_username/student_api`
+
+---
+
+##  6. Screenshots & Logs
+
+-  `docker_ps.png`: Screenshot showing running containers.  
+-  `docker_logs.txt`: Captured logs of Docker container output.
+
+---
+
+## 7. Troubleshooting
+
+- **Port already in use**:  
+  Use `sudo lsof -i :8000` to find and stop the process, or change the port in `docker-compose.yml`.
+
+- **Container name conflict**:  
+  Use `docker rm <container_id>` or `docker-compose down` to clean up.
+
+- **Database connection errors**:  
+  Ensure that the PostgreSQL container is running and all environment variables are correctly set in `.env`.
+
+---
