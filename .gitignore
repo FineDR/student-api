@@ -60,3 +60,62 @@ dist/
 
 # Jupyter Notebooks checkpoints
 .ipynb_checkpoints/
+# Logs
+student_frontend/logs
+student_frontend/*.log
+student_frontend/npm-debug.log*
+student_frontend/yarn-debug.log*
+student_frontend/yarn-error.log*
+student_frontend/pnpm-debug.log*
+student_frontend/lerna-debug.log*
+
+# Runtime data
+student_frontend/pids
+student_frontend/*.pid
+student_frontend/*.seed
+student_frontend/*.pid.lock
+
+# Dependency directories
+student_frontend/node_modules/
+student_frontend/.pnp/
+student_frontend/.pnp.js
+
+# Build output
+student_frontend/dist/
+student_frontend/build/
+student_frontend/dist-ssr/
+student_frontend/.next/
+student_frontend/out/
+student_frontend/.coverage/
+student_frontend/.cache/
+
+# Local env files
+student_frontend/.env
+student_frontend/.env.local
+student_frontend/.env.*.local
+
+# Editor directories and files
+student_frontend/.vscode/
+!student_frontend/.vscode/extensions.json
+student_frontend/.idea/
+student_frontend/.DS_Store
+student_frontend/*.suo
+student_frontend/*.ntvs*
+student_frontend/*.njsproj
+student_frontend/*.sln
+student_frontend/*.sw?
+
+# System files
+student_frontend/Thumbs.db
+student_frontend/ehthumbs.db
+
+# Optional npm cache directory
+student_frontend/.npm/
+
+# Yarn v2+
+student_frontend/.yarn/*
+!student_frontend/.yarn/patches
+!student_frontend/.yarn/plugins
+!student_frontend/.yarn/releases
+!student_frontend/.yarn/sdks
+!student_frontend/.yarn/versions

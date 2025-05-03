@@ -220,3 +220,40 @@ Docker Hub Link:
   Ensure that the PostgreSQL container is running and all environment variables are correctly set in `.env`.
 
 ---
+
+
+
+## Version Control and Docker Registry
+
+### ✅ GitHub Repository
+
+
+- `Dockerfile` for:
+  - Frontend (React)
+- `docker-compose.yml` defining all services including:
+  - Frontend nodes (for load balancing)
+  - PostgreSQL database
+  - NGINX load balancer
+- Frontend source code (`student_frontend/`)
+- Load balancer configuration file (`nginx.conf`)
+- Updated `README.md` file with instructions and setup details
+
+🔗 **GitHub Repository URL**:  
+[https://github.com/FineDR/student-api](https://github.com/FineDR/student-api)  
+*(Replace with your actual GitHub URL.)*
+
+---
+
+### ✅ Docker Hub Repositories
+
+All Docker images have been built and pushed to Docker Hub for public access:
+
+- **Backend API Image**  
+  🔗 `https://hub.docker.com/r/kubehwa/student-api-backend`
+
+- **Frontend Image**  
+  🔗 `https://hub.docker.com/r/kubehwa/student-frontend`
+
+- **NGINX Load Balancer Image**  
+  🔗 `https://hub.docker.com/r/kubehwa/student-nginx-loadbalancer`
+
