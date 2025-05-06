@@ -184,7 +184,7 @@ sudo docker-compose up -d
 ```
 
 Access your app at:  
- `http://<EC2-PUBLIC-IP>:8000`
+ `http://3.226.236.217:8000`
 
 ---
 
@@ -193,11 +193,11 @@ Access your app at:
 You can pull the image directly from Docker Hub:
 
 ```bash
-docker pull your_dockerhub_username/student_api
+docker pull kubehwa/student_api
 ```
 
 Docker Hub Link:  
- `https://hub.docker.com/r/your_dockerhub_username/student_api`
+ `https://hub.docker.com/r/kubehwa/student_api`
 
 ---
 
@@ -240,7 +240,7 @@ Docker Hub Link:
 
 🔗 **GitHub Repository URL**:  
 [https://github.com/FineDR/student-api](https://github.com/FineDR/student-api)  
-*(Replace with your actual GitHub URL.)*
+
 
 ---
 
