@@ -2,32 +2,38 @@ version: '3'
 
 services:
   frontend1:
-    build: .
+    build:
+      context: .
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+        VITE_NODE_ID: frontend1
     container_name: frontend1
-    environment:
-      - NODE_ID=frontend1
     ports:
-      - "3000:5173"
+      - "3000:4173"  # Vite preview runs on 4173
     networks:
       - frontend-network
 
   frontend2:
-    build: .
+    build:
+      context: .
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+        VITE_NODE_ID: frontend2
     container_name: frontend2
-    environment:
-      - NODE_ID=frontend2
     ports:
-      - "3001:5173"
+      - "3001:4173"
     networks:
       - frontend-network
 
   frontend3:
-    build: .
+    build:
+      context: .
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+        VITE_NODE_ID: frontend3
     container_name: frontend3
-    environment:
-      - NODE_ID=frontend3
     ports:
-      - "3002:5173"
+      - "3002:4173"
     networks:
       - frontend-network
 

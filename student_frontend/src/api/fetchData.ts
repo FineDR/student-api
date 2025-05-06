@@ -30,9 +30,11 @@ export const fetchData = async (
       throw new Error('Expected JSON response');
     }
 
-    const nodeHeader = res.headers.get('X-Node-ID') || 'Unknown';
+    // Get the X-Node-ID header or fallback to env
+    const nodeHeader = res.headers.get('X-Node-ID') || import.meta.env.VITE_NODE_ID || '';
     const data = await res.json();
 
+    // Update the state with the node ID and fetched data
     setNodeId(nodeHeader);
     setView(type);
     setError(null);
@@ -52,6 +54,6 @@ export const fetchData = async (
       console.error('Unknown error:', err);
       setError('An unknown error occurred');
     }
-    setNodeId('Unavailable');
+    setNodeId(import.meta.env.VITE_NODE_ID || 'Unavailable');
   }
 };
